@@ -10,30 +10,13 @@
 </head>
 <body class="bg bg-light">
 	
-	<div class="text-center naslov">
+	<div class="text-center">
 	<h1><a href="/postings" class="text-muted">Konkurs</a></h1>
 	</div>
 	
 	<div class="container">
 	
-	<table class="table table-striped">
-		<thead>
-		<tr>
-			<th scope="col">ID:</th>
-			<th scope="col">Name:</th>
-			<th scope="col">Date:</th>
-		</tr>
-		</thead>
-		<tbody>
-		<c:forEach items="${postings}" var="posting" varStatus="status">
-			<tr>
-				<td scope="row"><a href="/postings/${posting.id }">${posting.id}</a></td>
-				<td><a href="/postings/${posting.id }">${posting.name}</a></td>
-				<td><a href="/postings/${posting.id }">${posting.date}</a></td>
-			</tr>
-		</c:forEach>
-		</tbody>
-	</table>
+	Aplikacija uspesno poslata, kliknite <a href="/postings">ovde</a> da se vratite na pocetnu stranu.
 	
 	</div>
 

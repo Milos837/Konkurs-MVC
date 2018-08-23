@@ -1,3 +1,8 @@
 .clickable {
   cursor: pointer;
 }
+
+.naslov {
+	padding-top: 50px;
+	padding-bottom: 50px;
+}

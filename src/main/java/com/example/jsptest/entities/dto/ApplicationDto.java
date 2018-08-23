@@ -2,37 +2,56 @@ package com.example.jsptest.entities.dto;
 
 import java.util.List;
 
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
+import javax.validation.constraints.Size;
+
 import com.example.jsptest.entities.CertificateEntity;
 import com.example.jsptest.entities.EducationEntity;
 import com.example.jsptest.entities.enums.EEducationLevel;
 import com.example.jsptest.entities.enums.EGender;
 
 public class ApplicationDto {
-	
+
+	@NotNull(message = "First name must not be null.")
+	@Size(min = 2, max = 30, message = "First name must be between {min} and {max} characters.")
+	@Pattern(regexp = "^[a-zA-Z]*$", message = "First name can contain only uppercase and lowercase letters.")
 	private String firstName;
-	
+
+	@NotNull(message = "Last name must not be null")
+	@Size(min = 2, max = 30, message = "First name must be between {min} and {max} characters.")
+	@Pattern(regexp = "^[a-zA-Z]*$", message = "Last name can contain only uppercase and lowercase letters.")
 	private String lastName;
-	
+
 	private EGender gender;
-	
+
+	@NotNull(message = "Email must not be null.")
+	@Email(message = "Email not formated correctly.")
 	private String email;
-	
+
+	@NotNull(message = "ID number must not be null.")
+	@Size(min = 6, max = 6, message = "ID number must have exactly {min} digits.")
+	@Pattern(regexp = "^[1-9]*$", message = "ID number can contain only digits.")
 	private String idNumber;
-	
+
+	@NotNull(message = "SSN must not be null.")
+	@Size(min = 11, max = 11, message = "SSN must have exactly {min} digits.")
+	@Pattern(regexp = "^[1-9]*$", message = "SSN can contain only digits.")
 	private String ssn;
-	
+
 	private Integer citizenshipId;
-	
+
 	private List<LanguageDto> language;
-	
+
 	private EEducationLevel educationLevel;
-	
+
 	private List<EducationEntity> education;
-	
+
 	private String candidateNote;
-	
+
 	private List<CertificateEntity> certifications;
-	
+
 	private String applicationNote;
 
 	public ApplicationDto() {
@@ -135,7 +154,6 @@ public class ApplicationDto {
 		this.educationLevel = educationLevel;
 	}
 
-
 	public List<CertificateEntity> getCertifications() {
 		return certifications;
 	}
@@ -143,7 +161,5 @@ public class ApplicationDto {
 	public void setCertifications(List<CertificateEntity> certifications) {
 		this.certifications = certifications;
 	}
-	
-	
 
 }
