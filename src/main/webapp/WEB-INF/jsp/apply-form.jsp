@@ -22,7 +22,7 @@
 
 	<div class="container">
 
-		<form:form modelAttribute="applicationDTO" method="POST"
+		<form:form modelAttribute="applicationDto" method="POST"
 			action="/postings/${posting.id}/apply" enctype="multipart/form-data">
 			<div class="form-group">
 				<div class="row">
@@ -30,12 +30,14 @@
 						<label for="firstName">Ime:</label>
 						<form:input path="firstName" cssClass="form-control"
 							placeholder="Unesite ime ..." autofocus="autofocus"
-							required="required" />
+							required="required" value="${applicationDto.firstName}"/>
+						<form:errors path="firstName" cssClass="text-danger"/>	
 					</div>
 					<div class="col-md">
 						<label for="lastName">Prezime:</label>
 						<form:input path="lastName" cssClass="form-control"
-							placeholder="Unesite prezime ..." required="required"/>
+							placeholder="Unesite prezime ..." required="required" value="${applicationDto.lastName}"/>
+						<form:errors path="lastName" cssClass="text-danger"/>
 					</div>
 				</div>
 			</div>
@@ -55,7 +57,8 @@
 			<div class="form-group">
 				<label for="email">Email addresa:</label>
 				<form:input path="email" cssClass="form-control"
-					placeholder="Unesite email adresu ..." required="required"/>
+					placeholder="Unesite email adresu ..." required="required" value="${applicationDto.email}"/>
+				<form:errors path="email" cssClass="text-danger"/>
 			</div>
 
 			<div class="form-group">
@@ -63,12 +66,14 @@
 					<div class="col-md">
 						<label for="idNumber">Broj licne karte:</label>
 						<form:input path="idNumber" cssClass="form-control"
-							placeholder="Unesite broj licne karte ..." required="required"/>
+							placeholder="Unesite broj licne karte ..." required="required" value="${applicationDto.idNumber}"/>
+						<form:errors path="idNumber" cssClass="text-danger"/>
 					</div>
 					<div class="col-md">
 						<label for="ssn">JMBG:</label>
 						<form:input path="ssn" cssClass="form-control"
-							placeholder="Unesite jmbg ..." required="required"/>
+							placeholder="Unesite jmbg ..." required="required" value="${applicationDto.ssn}"/>
+						<form:errors path="ssn" cssClass="text-danger"/>
 					</div>
 				</div>
 			</div>
@@ -101,7 +106,7 @@
 			<div class="form-group">
 				<label for="candidateNote">Napomena:</label>
 				<form:textarea path="candidateNote" rows="3" cssClass="w-100"
-					placeholder="Unesite napomenu ..." />
+					placeholder="Unesite napomenu ..."/>
 			</div>
 
 			<div class="form-group">
@@ -114,7 +119,7 @@
 			</div>
 
 		</form:form>
-
+	
 	</div>
 
 </body>

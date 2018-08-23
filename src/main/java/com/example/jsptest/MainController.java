@@ -2,9 +2,12 @@ package com.example.jsptest;
 
 import java.util.List;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -31,48 +34,48 @@ import com.example.jsptest.services.FileHandler;
 
 @Controller
 public class MainController {
-	
+
 	@Autowired
 	private PostingRepository postingRepository;
-	
+
 	@Autowired
 	private RequirementsRepository requirementsRepository;
-	
+
 	@Autowired
 	private ReponsibilitiesRepository responsibilitiesRepository;
-	
+
 	@Autowired
 	private OfferingRepository offeringRepository;
-	
+
 	@Autowired
 	private CitizenshipRepository citizenshipRepository;
-	
+
 	@Autowired
 	private ApplicationService applicationService;
-	
+
 	@Autowired
 	private FileHandler fileHandler;
-	
-	@ModelAttribute("applicationDTO")
+
+	@ModelAttribute("applicationDto")
 	public ApplicationDto construct() {
 		ApplicationDto newApp = new ApplicationDto();
 		newApp.setGender(EGender.MALE);
 		return newApp;
 	}
-	
+
 	@RequestMapping(value = { "/postings", "/" }, method = RequestMethod.GET)
-    public String allPostings(Model model) {
- 
-        List<PostingEntity> postings  = (List<PostingEntity>) postingRepository.findAll();
- 
-        model.addAttribute("postings", postings);
- 
-        return "postings";
-    }
-	
+	public String allPostings(Model model) {
+
+		List<PostingEntity> postings = (List<PostingEntity>) postingRepository.findAll();
+
+		model.addAttribute("postings", postings);
+
+		return "postings";
+	}
+
 	@GetMapping("/postings/{postingId}")
 	public String getPosting(Model model, @PathVariable Integer postingId) {
-		
+
 		PostingEntity posting = postingRepository.findById(postingId).get();
 		List<RequirementsEntity> req = requirementsRepository.findByPosting(posting);
 		List<ResponsibilitiesEntity> res = responsibilitiesRepository.findByPosting(posting);
@@ -80,31 +83,43 @@ public class MainController {
 		posting.setRequirements(req);
 		posting.setResponsibilities(res);
 		posting.setOffering(off);
-		
+
 		model.addAttribute("posting", posting);
-		
+
 		return "posting-detail";
 	}
-	
+
 	@GetMapping("/postings/{postingId}/apply")
 	public String applyForm(Model model, @PathVariable Integer postingId) {
-		
+
 		PostingEntity posting = postingRepository.findById(postingId).get();
 		List<CitizenshipEntity> citizenships = (List<CitizenshipEntity>) citizenshipRepository.findAll();
-		
+
 		model.addAttribute("posting", posting);
 		model.addAttribute("citizenships", citizenships);
+		if (!model.containsAttribute("applicationDto")) {
+			model.addAttribute("applicationDto", new ApplicationDto());
+		}
 		return "apply-form";
 	}
-	
+
 	@PostMapping("/postings/{postingId}/apply")
 	public String addApplication(@PathVariable Integer postingId,
-			@ModelAttribute("applicationDto") ApplicationDto applicationDto, @RequestParam("file") MultipartFile file) {
-		Integer appId = applicationService.save(postingId, applicationDto).getId();
-		fileHandler.uploadCv(file, appId);
-		return "apply-success";
+			@ModelAttribute("applicationDto") @Valid ApplicationDto applicationDto, BindingResult result,
+			@RequestParam("file") MultipartFile file, Model model) {
+
+		if (result.hasErrors()) {
+			PostingEntity posting = postingRepository.findById(postingId).get();
+			List<CitizenshipEntity> citizenships = (List<CitizenshipEntity>) citizenshipRepository.findAll();
+
+			model.addAttribute("posting", posting);
+			model.addAttribute("citizenships", citizenships);
+			return "apply-form";
+		} else {
+			Integer appId = applicationService.save(postingId, applicationDto).getId();
+			fileHandler.uploadCv(file, appId);
+			return "apply-success";
+		}
 	}
-	
-	
 
 }
