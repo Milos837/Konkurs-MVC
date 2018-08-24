@@ -1,8 +1,36 @@
+html,
+body {
+   margin:0;
+   padding:0;
+   height:100%;
+}
+
 .clickable {
-  cursor: pointer;
+	cursor: pointer;
+}
+
+#container {
+   min-height:100%;
+   position:relative;
+}
+
+#body {
+   padding:10px;
+   padding-bottom:60px;   /* Height of the footer */
 }
 
 .naslov {
 	padding-top: 50px;
 	padding-bottom: 50px;
+}
+
+.footer {
+	position:absolute;
+   bottom:0;
+   width:100%;
+   height:60px
+}
+
+.naslov-main {
+	padding-top: 150px;
 }

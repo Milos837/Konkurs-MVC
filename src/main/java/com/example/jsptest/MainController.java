@@ -1,6 +1,7 @@
 package com.example.jsptest;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 import javax.validation.Valid;
 
@@ -62,11 +63,18 @@ public class MainController {
 		newApp.setGender(EGender.MALE);
 		return newApp;
 	}
+	
+	@GetMapping("/")
+	public String mainPage() {
+		return "main";
+	}
 
-	@RequestMapping(value = { "/postings", "/" }, method = RequestMethod.GET)
+	@RequestMapping(value = { "/postings"}, method = RequestMethod.GET)
 	public String allPostings(Model model) {
 
-		List<PostingEntity> postings = (List<PostingEntity>) postingRepository.findAll();
+		List<PostingEntity> postings = ((List<PostingEntity>) postingRepository.findAll())
+				.stream().filter(posting -> !posting.getDeleted().equals(true))
+				.collect(Collectors.toList());
 
 		model.addAttribute("postings", postings);
 

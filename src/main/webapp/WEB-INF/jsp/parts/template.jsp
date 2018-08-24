@@ -14,29 +14,18 @@
 <body class="bg bg-light">
 
 	<div id="container">
-		<%@ include file="parts/header.jsp"%>
+	<%@ include file="parts/header.jsp"%>
 
+	
+	<div id="body">
+	
+	</div>
+	
 
-		<div id="body">
-			<div class="text-center">
-				<h1>
-					<a href="/postings" class="text-muted">Konkurs</a>
-				</h1>
-			</div>
-
-			<div class="container">
-
-				Aplikacija uspesno poslata, kliknite <a href="/postings">ovde</a> da
-				se vratite na pocetnu stranu.
-
-			</div>
-		</div>
-
-
-		<%@ include file="parts/footer.jsp"%>
+	<%@ include file="parts/footer.jsp"%>
 	</div>
 
-
+	
 
 </body>
 

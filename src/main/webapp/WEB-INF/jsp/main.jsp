@@ -18,17 +18,16 @@
 
 
 		<div id="body">
-			<div class="text-center">
-				<h1>
-					<a href="/postings" class="text-muted">Konkurs</a>
-				</h1>
+			<div class="container text-center text-secondary naslov-main">
+				<h4 class="display-4">Dobrodosli u Web aplikaciju Konkurs!</h4>
+				<hr>
+				<h4 class="lead">Kliknite na dugme ispod za pregled oglasa.</h4>
 			</div>
 
-			<div class="container">
-
-				Aplikacija uspesno poslata, kliknite <a href="/postings">ovde</a> da
-				se vratite na pocetnu stranu.
-
+			<div class="text-center">
+				<a href="/postings">
+					<button class="btn btn-secondary btn-lg mt-3">Oglasi</button>
+				</a>
 			</div>
 		</div>
 
