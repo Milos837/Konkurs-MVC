@@ -21,7 +21,7 @@
 		<div id="body">
 			<div class="text-center naslov">
 				<h1>
-					<a href="/postings" class="text-muted">Konkurs</a>
+					<a href="${pageContext.request.contextPath}/postings" class="text-muted">Konkurs</a>
 				</h1>
 			</div>
 
@@ -38,9 +38,9 @@
 					<tbody>
 						<c:forEach items="${postings}" var="posting" varStatus="status">
 							<tr>
-								<td scope="row"><a href="/postings/${posting.id }">${posting.id}</a></td>
-								<td><a href="/postings/${posting.id }">${posting.name}</a></td>
-								<td><a href="/postings/${posting.id }">${posting.date}</a></td>
+								<td scope="row"><a href="${pageContext.request.contextPath}/postings/${posting.id }">${posting.id}</a></td>
+								<td><a href="${pageContext.request.contextPath}/postings/${posting.id }">${posting.name}</a></td>
+								<td><a href="${pageContext.request.contextPath}/postings/${posting.id }">${posting.date}</a></td>
 							</tr>
 						</c:forEach>
 					</tbody>

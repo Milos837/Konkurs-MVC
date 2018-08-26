@@ -53,7 +53,7 @@
 						</div>
 
 						<div class="text-center">
-							<form action="/postings/${posting.id}/apply">
+							<form action="${pageContext.request.contextPath}/postings/${posting.id}/apply">
 								<input type="submit" class="btn btn-success mr-3"
 									value="Prijavi se" />
 							</form>

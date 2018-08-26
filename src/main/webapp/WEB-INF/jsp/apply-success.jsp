@@ -27,7 +27,7 @@
 
 			<div class="container">
 
-				Aplikacija uspesno poslata, kliknite <a href="/postings">ovde</a> da
+				Aplikacija uspesno poslata, kliknite <a href="${pageContext.request.contextPath}/postings">ovde</a> da
 				se vratite na pocetnu stranu.
 
 			</div>

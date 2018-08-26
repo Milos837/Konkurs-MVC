@@ -1,4 +1,5 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="security" uri="http://www.springframework.org/security/tags" %>
 <!DOCTYPE HTML>
 <html>
 <head>
@@ -26,7 +27,7 @@
 			</div>
 
 			<div class="text-center">
-				<a href="/postings">
+				<a href="${pageContext.request.contextPath}/postings">
 					<button class="btn btn-secondary btn-lg mt-3">Oglasi</button>
 				</a>
 			</div>

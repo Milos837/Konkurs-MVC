@@ -27,7 +27,7 @@
 			<div class="container">
 
 				<form:form modelAttribute="applicationDto" method="POST"
-					action="/postings/${posting.id}/apply"
+					action="${pageContext.request.contextPath}/postings/${posting.id}/apply"
 					enctype="multipart/form-data">
 					<div class="form-group">
 						<div class="row">

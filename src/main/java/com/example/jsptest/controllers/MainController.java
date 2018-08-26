@@ -129,5 +129,10 @@ public class MainController {
 			return "apply-success";
 		}
 	}
+	
+	@GetMapping("/login")
+	public String login() {
+		return "login";
+	}
 
 }
