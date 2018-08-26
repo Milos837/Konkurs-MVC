@@ -1,4 +1,4 @@
-package com.example.jsptest;
+package com.example.jsptest.controllers;
 
 import java.util.List;
 import java.util.stream.Collectors;
