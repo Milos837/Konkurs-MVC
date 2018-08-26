@@ -7,7 +7,7 @@
 	<groupId>com.example</groupId>
 	<artifactId>jsptest</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<packaging>jar</packaging>
+	<packaging>war</packaging>
 
 	<name>jsptest</name>
 	<description>Demo project for Spring Boot</description>
@@ -94,9 +94,16 @@
 			<version>6.0.12.Final</version>
 		</dependency>
 
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-tomcat</artifactId>
+			<scope>provided</scope>			<!--  SKLONI OVO AKO PRAVI 'STANDALONE' PROBLEME  -->
+		</dependency>
+
 	</dependencies>
 
 	<build>
+		<finalName>${artifactId}</finalName>
 		<plugins>
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
