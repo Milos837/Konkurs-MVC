@@ -19,14 +19,14 @@
 
 
 		<div id="body">
-			<div class="text-center naslov">
-				<h1>
-					<a href="${pageContext.request.contextPath}/admin/postings"
-						class="text-muted">Konkurs</a>
-				</h1>
-			</div>
 
 			<div class="container">
+				<div class="clearfix mt-5">
+					<h2 class="float-left mt-4 mb-4">Aktivni konkursi:</h2>
+					<a href="${pageContext.request.contextPath}/admin/postings/new">
+						<button type="button" class="btn btn-success float-right mt-4 mb-4">Dodaj konkurs</button>
+					</a>
+				</div>
 
 				<table class="table table-striped">
 					<thead>
@@ -42,7 +42,8 @@
 							<tr>
 
 								<!--  Link za brisanje konkursa -->
-								<c:url var="deleteLink" value="${pageContext.request.contextPath}/admin/postings/">
+								<c:url var="deleteLink"
+									value="${pageContext.request.contextPath}/admin/postings/">
 									<c:param name="command" value="DELETE" />
 									<c:param name="postingId" value="${posting.id }" />
 								</c:url>
@@ -53,8 +54,7 @@
 									href="${pageContext.request.contextPath}/admin/postings/${posting.id }">${posting.name}</a></td>
 								<td><a
 									href="${pageContext.request.contextPath}/admin/postings/${posting.id }">${posting.date}</a></td>
-								<td><a
-									href="${deleteLink}"
+								<td><a href="${deleteLink}"
 									onclick="if (!(confirm('Da li sigurno zelite da uklonite konkurs?'))) return false">
 										<button class="btn btn-secondary btn-sm float-right">Ukloni</button>
 								</a></td>

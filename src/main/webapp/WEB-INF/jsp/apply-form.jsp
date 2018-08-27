@@ -18,7 +18,6 @@
 	<div id="container">
 		<%@ include file="parts/header.jsp"%>
 
-
 		<div id="body">
 			<div class="text-center text-secondary">
 				<h2 class="mt-5 mb-5">Prijava za konkurs ${posting.name}</h2>

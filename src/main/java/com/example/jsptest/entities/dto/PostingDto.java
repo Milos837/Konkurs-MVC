@@ -3,10 +3,12 @@ package com.example.jsptest.entities.dto;
 import java.util.List;
 
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
 public class PostingDto {
 	
-	@NotNull
+	@NotNull(message = "Posting name must not be null.")
+	@Size(min = 5, message = "Posting name must have at least {min} characters.")
 	private String name;
 	
 	@NotNull

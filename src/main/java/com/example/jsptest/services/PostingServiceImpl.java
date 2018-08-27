@@ -1,6 +1,8 @@
 package com.example.jsptest.services;
 
 import java.time.LocalDate;
+import java.util.List;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -111,6 +113,16 @@ public class PostingServiceImpl implements PostingService{
 			return posting;
 		}
 		return null;
+	}
+	
+	@Override
+	public List<PostingEntity> getActive() {
+		
+		List<PostingEntity> postings = ((List<PostingEntity>) postingRepository.findAll())
+				.stream().filter(posting1 -> !posting1.getDeleted().equals(true))
+				.collect(Collectors.toList());
+		
+		return postings;
 	}
 	
 	
