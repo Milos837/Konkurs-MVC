@@ -101,9 +101,17 @@
 							<tbody>
 								<c:forEach items="${applications}" var="app" varStatus="status">
 									<tr>
-										<td>${app.id}</td>
-										<td>${app.candidate.firstName}${app.candidate.lastName}</td>
-										<td>${app.candidate.email}</td>
+										<td>
+										<a href="${pageContext.request.contextPath}/admin/postings/${posting.id }/applications/${app.id}">${app.id}</a>
+										</td>
+										<td>
+										<a href="${pageContext.request.contextPath}/admin/postings/${posting.id }/applications/${app.id}">
+										${app.candidate.firstName} ${app.candidate.lastName}</a>
+										</td>
+										<td>
+										<a href="${pageContext.request.contextPath}/admin/postings/${posting.id }/applications/${app.id}">
+										${app.candidate.email}</a>
+										</td>
 									</tr>
 								</c:forEach>
 							</tbody>

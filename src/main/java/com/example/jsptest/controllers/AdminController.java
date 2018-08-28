@@ -103,5 +103,21 @@ public class AdminController {
 		}
 		return "main";
 	}
+	
+	//	Vrati aplikaciju
+	@GetMapping("/admin/postings/{postingId}/applications/{appId}")
+	public String getApplication(@PathVariable Integer postingId, @PathVariable Integer appId, Model model) {
+		if (postingRepository.existsById(postingId) && applicationRepository.existsById(appId)
+				&& applicationRepository.findByPosting(postingRepository.findById(postingId).get()) != null) {
+			
+			PostingEntity posting = postingRepository.findById(postingId).get();
+			ApplicationEntity app = applicationRepository.findById(appId).get();
+			model.addAttribute("posting", posting);
+			model.addAttribute("app", app);
+			
+			return "admin-app-detail";
+		}
+		return "main";
+	}
 
 }
