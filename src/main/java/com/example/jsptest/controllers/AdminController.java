@@ -1,6 +1,5 @@
 package com.example.jsptest.controllers;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.validation.Valid;
@@ -15,8 +14,10 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
+import com.example.jsptest.entities.ApplicationEntity;
 import com.example.jsptest.entities.PostingEntity;
 import com.example.jsptest.entities.dto.PostingDto;
+import com.example.jsptest.repositories.ApplicationRepository;
 import com.example.jsptest.repositories.PostingRepository;
 import com.example.jsptest.services.PostingService;
 
@@ -28,13 +29,13 @@ public class AdminController {
 
 	@Autowired
 	private PostingService postingService;
+	
+	@Autowired
+	private ApplicationRepository applicationRepository;
 
 	@ModelAttribute("postingDto")
 	public PostingDto construct() {
 		PostingDto posting = new PostingDto();
-//		List<String> res = new ArrayList<>();
-//		List<String> req = new ArrayList<>();
-//		List<String> off = new ArrayList<>();
 		posting.setResponsibilities(new AutoPopulatingList<String>(String.class));
 		posting.setRequirements(new AutoPopulatingList<String>(String.class));
 		posting.setOffering(new AutoPopulatingList<String>(String.class));
@@ -85,11 +86,22 @@ public class AdminController {
 		} else {
 			postingService.save(postingDto);
 
-			List<PostingEntity> postings = postingService.getActive();
-
-			model.addAttribute("postings", postings);
-			return "admin-postings";
+			return "redirect:/admin/postings/";
 		}
+	}
+	
+	//	Vrati aplikacije za konkurs
+	@GetMapping("/admin/postings/{postingId}")
+	public String getPosting(@PathVariable Integer postingId, Model model) {
+		if (postingRepository.existsById(postingId)) {
+			PostingEntity posting = postingRepository.findById(postingId).get();
+			List<ApplicationEntity> applications = applicationRepository.findByPosting(posting);
+			
+			model.addAttribute("posting", posting);
+			model.addAttribute("applications", applications);
+			return "admin-posting-detail";
+		}
+		return "main";
 	}
 
 }

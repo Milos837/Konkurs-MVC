@@ -12,9 +12,17 @@
 
 		<div class="collapse navbar-collapse" id="navbarsExample07">
 			<ul class="navbar-nav mr-auto">
+				<security:authorize access="!isAuthenticated()">
 				<li class="nav-item"><a class="nav-link"
 					href="${pageContext.request.contextPath}/postings">Oglasi</a></li>
 				<li class="nav-item"><a class="nav-link" href="#">Link</a></li>
+				</security:authorize>
+				<security:authorize access="isAuthenticated()">
+				<li class="nav-item"><a class="nav-link"
+					href="${pageContext.request.contextPath}/admin/postings/">Oglasi</a></li>
+				<li class="nav-item"><a class="nav-link" href="#">Link</a></li>
+				</security:authorize>
+				
 			</ul>
 
 			<security:authorize access="!isAuthenticated()">
