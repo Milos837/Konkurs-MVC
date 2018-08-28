@@ -45,7 +45,7 @@
 			<div class="container-fluid">
 				<div class="row">
 					<div class="col-md-3 offset-md-1">
-						<div class="card mt-5">
+						<div class="card mt-5 mb-5">
 							<h5 class="card-header bg-secondary text-white">${posting.name}</h5>
 							<div class="card-body">
 

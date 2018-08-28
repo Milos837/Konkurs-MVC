@@ -1,5 +1,8 @@
 package com.example.jsptest.services;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -51,6 +54,7 @@ public class ApplicationServiceImpl implements ApplicationService{
 	@Autowired
 	private EmailService emailService;
 	
+	@Override
 	public ApplicationEntity save(Integer postingId, ApplicationDto newApplication) {
 		ApplicationEntity application = new ApplicationEntity();
 		CandidateEntity candidate = new CandidateEntity();
@@ -119,12 +123,25 @@ public class ApplicationServiceImpl implements ApplicationService{
 		return application;
 	}
 	
+	@Override
 	public ApplicationEntity delete(Integer applicationId) {
 		if (applicationRepository.existsById(applicationId) && !applicationRepository.findById(applicationId).get().getDeleted()) {
 			ApplicationEntity application = applicationRepository.findById(applicationId).get();
 			application.setDeleted(true);
 			applicationRepository.save(application);
 			return application;
+		}
+		return null;
+	}
+	
+	@Override
+	public List<LanguageEntity> getLanguagesForApplication(Integer appId) {
+		if (applicationRepository.existsById(appId)) {
+			ApplicationEntity application = applicationRepository.findById(appId).get();
+			List<LanguageEntity> languages = ((List<CandidateLanguageEntity>) candidateLanguageRepository
+					.findByCandidate(application.getCandidate())).stream().map(c -> c.getLanguage())
+							.collect(Collectors.toList());
+			return languages;
 		}
 		return null;
 	}

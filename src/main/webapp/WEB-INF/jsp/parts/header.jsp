@@ -15,12 +15,10 @@
 				<security:authorize access="!isAuthenticated()">
 				<li class="nav-item"><a class="nav-link"
 					href="${pageContext.request.contextPath}/postings">Oglasi</a></li>
-				<li class="nav-item"><a class="nav-link" href="#">Link</a></li>
 				</security:authorize>
 				<security:authorize access="isAuthenticated()">
 				<li class="nav-item"><a class="nav-link"
 					href="${pageContext.request.contextPath}/admin/postings/">Oglasi</a></li>
-				<li class="nav-item"><a class="nav-link" href="#">Link</a></li>
 				</security:authorize>
 				
 			</ul>

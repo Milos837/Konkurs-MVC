@@ -15,10 +15,12 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import com.example.jsptest.entities.ApplicationEntity;
+import com.example.jsptest.entities.LanguageEntity;
 import com.example.jsptest.entities.PostingEntity;
 import com.example.jsptest.entities.dto.PostingDto;
 import com.example.jsptest.repositories.ApplicationRepository;
 import com.example.jsptest.repositories.PostingRepository;
+import com.example.jsptest.services.ApplicationService;
 import com.example.jsptest.services.PostingService;
 
 @Controller
@@ -32,6 +34,9 @@ public class AdminController {
 	
 	@Autowired
 	private ApplicationRepository applicationRepository;
+	
+	@Autowired
+	private ApplicationService applicationService;
 
 	@ModelAttribute("postingDto")
 	public PostingDto construct() {
@@ -112,8 +117,10 @@ public class AdminController {
 			
 			PostingEntity posting = postingRepository.findById(postingId).get();
 			ApplicationEntity app = applicationRepository.findById(appId).get();
+			List<LanguageEntity> languages = applicationService.getLanguagesForApplication(appId);
 			model.addAttribute("posting", posting);
-			model.addAttribute("app", app);
+			model.addAttribute("application", app);
+			model.addAttribute("languages", languages);
 			
 			return "admin-app-detail";
 		}
