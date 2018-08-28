@@ -41,20 +41,13 @@
 						<c:forEach items="${postings}" var="posting" varStatus="status">
 							<tr>
 
-								<!--  Link za brisanje konkursa -->
-								<c:url var="deleteLink"
-									value="${pageContext.request.contextPath}/admin/postings/">
-									<c:param name="command" value="DELETE" />
-									<c:param name="postingId" value="${posting.id }" />
-								</c:url>
-
 								<td scope="row"><a
 									href="${pageContext.request.contextPath}/admin/postings/${posting.id }">${posting.id}</a></td>
 								<td><a
 									href="${pageContext.request.contextPath}/admin/postings/${posting.id }">${posting.name}</a></td>
 								<td><a
 									href="${pageContext.request.contextPath}/admin/postings/${posting.id }">${posting.date}</a></td>
-								<td><a href="${deleteLink}"
+								<td><a href="${pageContext.request.contextPath}/admin/postings/${posting.id }/delete"
 									onclick="if (!(confirm('Da li sigurno zelite da uklonite konkurs?'))) return false">
 										<button class="btn btn-secondary btn-sm float-right">Ukloni</button>
 								</a></td>

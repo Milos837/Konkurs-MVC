@@ -8,11 +8,12 @@ import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.util.AutoPopulatingList;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 
 import com.example.jsptest.entities.PostingEntity;
 import com.example.jsptest.entities.dto.PostingDto;
@@ -31,55 +32,54 @@ public class AdminController {
 	@ModelAttribute("postingDto")
 	public PostingDto construct() {
 		PostingDto posting = new PostingDto();
-		List<String> res = new ArrayList<>();
-		List<String> req = new ArrayList<>();
-		List<String> off = new ArrayList<>();
-		posting.setResponsibilities(res);
-		posting.setRequirements(req);
-		posting.setOffering(off);
+//		List<String> res = new ArrayList<>();
+//		List<String> req = new ArrayList<>();
+//		List<String> off = new ArrayList<>();
+		posting.setResponsibilities(new AutoPopulatingList<String>(String.class));
+		posting.setRequirements(new AutoPopulatingList<String>(String.class));
+		posting.setOffering(new AutoPopulatingList<String>(String.class));
 		return posting;
 	}
 
+	//	Vrati pocetnu stranu
 	@GetMapping("/admin/")
 	public String mainPage() {
 		return "main";
 	}
 
-	// TODO Treba naci bolje resenje
+	//	Vrati sve konkurse
 	@GetMapping("/admin/postings/")
-	public String deletePosting(@RequestParam(required = false) Integer postingId,
-			@RequestParam(required = false) String command, Model model) {
-		if (postingId == null) {
-			List<PostingEntity> postings = postingService.getActive();
+	public String getPostings(Model model) {
+		List<PostingEntity> postings = postingService.getActive();
 
-			model.addAttribute("postings", postings);
-			return "admin-postings";
+		model.addAttribute("postings", postings);
+		return "admin-postings";
+	}
 
-		} else if (command.equals("DELETE")) {
-			if (postingRepository.existsById(postingId)) {
-				PostingEntity posting = postingRepository.findById(postingId).get();
-				posting.setDeleted(true);
-				postingRepository.save(posting);
+	//	Obrisi konkurs
+	@GetMapping("/admin/postings/{postingId}/delete")
+	public String deletePosting(@PathVariable Integer postingId, Model model) {
+		if (postingRepository.existsById(postingId)) {
+			PostingEntity posting = postingRepository.findById(postingId).get();
+			posting.setDeleted(true);
+			postingRepository.save(posting);
 
-				List<PostingEntity> postings = postingService.getActive();
-
-				model.addAttribute("postings", postings);
-				return "admin-postings";
-			}
+			return "redirect:/admin/postings/";
 		}
-
 		return "main";
 	}
-	
+
+	//	Vrati formu za dodavanje konkursa
 	@GetMapping("/admin/postings/new")
 	public String postingForm(Model model) {
 		return "posting-form";
 	}
 
+	//	Dodaj novi konkurs
 	@PostMapping("/admin/postings/new")
 	public String addPosting(@Valid @ModelAttribute("postingDto") PostingDto postingDto, BindingResult result,
 			Model model) {
-		if (!result.hasErrors()) {
+		if (result.hasErrors()) {
 			return "posting-form";
 
 		} else {
@@ -90,12 +90,6 @@ public class AdminController {
 			model.addAttribute("postings", postings);
 			return "admin-postings";
 		}
-	}
-	
-	@PostMapping("/admin/postings/new/responsibility")
-	public String addResponsibility(@RequestParam String responsibility, Model model) {
-		construct().getResponsibilities().add(responsibility);
-		return "redirect:/admin/postings/new";
 	}
 
 }
