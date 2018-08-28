@@ -182,7 +182,10 @@
 
 											<div class="clearfix">
 												<div class="float-left">
-													<button type="button" class="btn btn-success mr-3">Preuzmi CV</button>
+													<a href="${pageContext.request.contextPath}/admin/postings/${posting.id }/applications/${application.id}/downloadCV/">
+														<button type="button" class="btn btn-success mr-3">Preuzmi CV</button>
+													</a>
+													
 													<button type="button" class="btn btn-success mr-3">Preuzmi MP</button>
 													<button type="button" class="btn btn-success">Preuzmi PP</button>
 												</div>
