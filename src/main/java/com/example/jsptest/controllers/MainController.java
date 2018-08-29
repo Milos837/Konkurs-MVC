@@ -8,6 +8,7 @@ import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.util.AutoPopulatingList;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -18,14 +19,19 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.example.jsptest.entities.CertificateEntity;
 import com.example.jsptest.entities.CitizenshipEntity;
+import com.example.jsptest.entities.EducationEntity;
+import com.example.jsptest.entities.LanguageEntity;
 import com.example.jsptest.entities.OfferingEntity;
 import com.example.jsptest.entities.PostingEntity;
 import com.example.jsptest.entities.RequirementsEntity;
 import com.example.jsptest.entities.ResponsibilitiesEntity;
 import com.example.jsptest.entities.dto.ApplicationDto;
+import com.example.jsptest.entities.dto.LanguageDto;
 import com.example.jsptest.entities.enums.EGender;
 import com.example.jsptest.repositories.CitizenshipRepository;
+import com.example.jsptest.repositories.LanguageRepository;
 import com.example.jsptest.repositories.OfferingRepository;
 import com.example.jsptest.repositories.PostingRepository;
 import com.example.jsptest.repositories.ReponsibilitiesRepository;
@@ -50,6 +56,9 @@ public class MainController {
 
 	@Autowired
 	private CitizenshipRepository citizenshipRepository;
+	
+	@Autowired
+	private LanguageRepository languageRepository;
 
 	@Autowired
 	private ApplicationService applicationService;
@@ -61,6 +70,9 @@ public class MainController {
 	public ApplicationDto construct() {
 		ApplicationDto newApp = new ApplicationDto();
 		newApp.setGender(EGender.MALE);
+		newApp.setLanguage(new AutoPopulatingList<LanguageDto>(LanguageDto.class));
+		newApp.setEducation(new AutoPopulatingList<EducationEntity>(EducationEntity.class));
+		newApp.setCertifications(new AutoPopulatingList<CertificateEntity>(CertificateEntity.class));
 		return newApp;
 	}
 	
@@ -102,9 +114,11 @@ public class MainController {
 
 		PostingEntity posting = postingRepository.findById(postingId).get();
 		List<CitizenshipEntity> citizenships = (List<CitizenshipEntity>) citizenshipRepository.findAll();
+		List<LanguageEntity> languages = (List<LanguageEntity>) languageRepository.findAll();
 
 		model.addAttribute("posting", posting);
 		model.addAttribute("citizenships", citizenships);
+		model.addAttribute("languages", languages);
 		if (!model.containsAttribute("applicationDto")) {
 			model.addAttribute("applicationDto", new ApplicationDto());
 		}

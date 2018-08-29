@@ -12,6 +12,88 @@
 	href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.2/css/bootstrap.min.css"
 	integrity="sha384-Smlep5jCw/wG7hdkwQ/Z5nLIefveQRIY9nfy6xoR1uRYBtpZgI6339F5dgvm/e9B"
 	crossorigin="anonymous">
+
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script>
+	$(document)
+			.ready(
+					function() {
+
+						var counterLang = 0;
+						var counterEdu = 0;
+						var counterCert = 0;
+
+						$('#dodajLang')
+								.click(
+										function() {
+											var toAdd = $('#sel1').val();
+											var text = $(
+													'#sel1 option:selected')
+													.text();
+											if (toAdd.length !== 0) {
+												$('#listaLang')
+														.append(
+																'<input type="hidden" class="list-group-item" name="language['
+																	+ counterLang + '].languageId" value ="'
+																	+ toAdd + '">'
+																		+ '<li class="list-group-item">'
+																		+ text
+																		+ '</li>');
+
+												counterLang++;
+											}
+
+										});
+						$('#dodajEdu')
+								.click(
+										function() {
+											var schoolName = $(
+													'input[name=schoolName]')
+													.val();
+											var schoolNote = $(
+													'input[name=schoolNote]')
+													.val();
+											if (schoolName.length !== 0) {
+												$('#listaEdu')
+														.append(
+																'<input type="hidden" class="list-group-item" name="education['
+															+ counterEdu + '].schoolName" value ="'
+															+ schoolName + '">' +
+															'<input type="hidden" class="list-group-item" name="education['
+															+ counterEdu + '].note" value ="'
+															+ schoolNote + '">' +
+															'<li class="list-group-item">' + schoolName + ', Napomena: ' + schoolNote + '</li>');
+												counterEdu++;
+											}
+
+										});
+						$('#dodajCert')
+								.click(
+										function() {
+											var certificateName = $(
+													'input[name=certificateName]')
+													.val();
+											var certificateNote = $(
+													'input[name=certificateNote]')
+													.val();
+											if (certificateName.length !== 0) {
+												$('#listaCert')
+														.append(
+																'<input type="hidden" class="list-group-item" name="certifications['
+															+ counterCert + '].certificate" value ="'
+															+ certificateName + '">' +
+															'<input type="hidden" class="list-group-item" name="certifications['
+															+ counterCert + '].note" value ="'
+															+ certificateNote + '">' +
+															'<li class="list-group-item">' + certificateName + ', Napomena: ' + certificateNote + '</li>');
+												counterCert++;
+											}
+		
+										});
+					});
+</script>
+
 </head>
 <body class="bg bg-light">
 
@@ -111,6 +193,46 @@
 						</div>
 					</div>
 
+					<div class="row">
+						<div class="col-md">
+							<div class="form-group">
+								<ul class="list-group" id="listaLang">
+									<li class="list-group-item list-group-item-secondary">Jezici:
+										<button type="button"
+											class="btn btn-sm btn-secondary float-right"
+											data-toggle="modal" data-target="#exampleModal1">
+											Dodaj</button>
+									</li>
+								</ul>
+							</div>
+						</div>
+						<div class="col-md">
+							<div class="form-group">
+								<ul class="list-group" id="listaEdu">
+									<li class="list-group-item list-group-item-secondary">Skole:
+										<button type="button"
+											class="btn btn-sm btn-secondary float-right"
+											data-toggle="modal" data-target="#exampleModal2">
+											Dodaj</button>
+									</li>
+								</ul>
+							</div>
+						</div>
+						<div class="col-md">
+							<div class="form-group">
+								<ul class="list-group" id="listaCert">
+									<li class="list-group-item list-group-item-secondary">Strucni
+										radovi:
+										<button type="button"
+											class="btn btn-sm btn-secondary float-right"
+											data-toggle="modal" data-target="#exampleModal3">
+											Dodaj</button>
+									</li>
+								</ul>
+							</div>
+						</div>
+					</div>
+
 					<div class="form-group">
 						<label for="candidateNote">Napomena:</label>
 						<form:textarea path="candidateNote" rows="3" cssClass="w-100"
@@ -129,6 +251,111 @@
 
 				</form:form>
 
+			</div>
+		</div>
+
+		<!-- Modal za jezike -->
+		<div class="modal fade" id="exampleModal1" tabindex="-1" role="dialog"
+			aria-labelledby="exampleModalLabel" aria-hidden="true">
+			<div class="modal-dialog" role="document">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h5 class="modal-title" id="exampleModalLabel">Dodaj jezik</h5>
+						<button type="button" class="close" data-dismiss="modal"
+							aria-label="Close">
+							<span aria-hidden="true">&times;</span>
+						</button>
+					</div>
+
+					<div class="modal-body">
+
+						<div class="form-group">
+							<label for="sel1">Izaberite jezik:</label> <select
+								class="form-control" id="sel1">
+								<c:forEach items="${languages}" var="l" varStatus="status">
+									<option value="${l.id}">${l.language},Nivo: ${l.level}</option>
+								</c:forEach>
+							</select>
+						</div>
+
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-secondary"
+							data-dismiss="modal">Zatvori</button>
+						<button type="button" class="btn btn-primary" id="dodajLang">Dodaj</button>
+					</div>
+
+				</div>
+			</div>
+		</div>
+
+		<!-- Modal za skole -->
+		<div class="modal fade" id="exampleModal2" tabindex="-1" role="dialog"
+			aria-labelledby="exampleModalLabel" aria-hidden="true">
+			<div class="modal-dialog" role="document">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h5 class="modal-title" id="exampleModalLabel">Dodaj skolu</h5>
+						<button type="button" class="close" data-dismiss="modal"
+							aria-label="Close">
+							<span aria-hidden="true">&times;</span>
+						</button>
+					</div>
+
+					<div class="modal-body">
+
+						<div class="form-group">
+							<label for="schoolName">Naziv skole:</label> <input type="text"
+								class="form-control" placeholder="Unesite naziv skole ..." name="schoolName">
+						</div>
+						<div class="form-group">
+							<label for="schoolNote">Napomena:</label> <input type="text"
+								class="form-control" placeholder="Unesite napomenu ..." name="schoolNote">
+						</div>
+
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-secondary"
+							data-dismiss="modal">Zatvori</button>
+						<button type="button" class="btn btn-primary" id="dodajEdu">Dodaj</button>
+					</div>
+
+				</div>
+			</div>
+		</div>
+		
+		<!-- Modal za strucne radove -->
+		<div class="modal fade" id="exampleModal3" tabindex="-1" role="dialog"
+			aria-labelledby="exampleModalLabel" aria-hidden="true">
+			<div class="modal-dialog" role="document">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h5 class="modal-title" id="exampleModalLabel">Dodaj strucni rad</h5>
+						<button type="button" class="close" data-dismiss="modal"
+							aria-label="Close">
+							<span aria-hidden="true">&times;</span>
+						</button>
+					</div>
+
+					<div class="modal-body">
+
+						<div class="form-group">
+							<label for="certificateName">Naziv strucnog rada:</label> <input type="text"
+								class="form-control" placeholder="Unesite naziv strucnog rada ..." name="certificateName">
+						</div>
+						<div class="form-group">
+							<label for="certificateNote">Napomena:</label> <input type="text"
+								class="form-control" placeholder="Unesite napomenu ..." name="certificateNote">
+						</div>
+
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-secondary"
+							data-dismiss="modal">Zatvori</button>
+						<button type="button" class="btn btn-primary" id="dodajCert">Dodaj</button>
+					</div>
+
+				</div>
 			</div>
 		</div>
 
