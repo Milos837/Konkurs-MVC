@@ -27,7 +27,7 @@
 			<div class="container-fluid">
 				<div class="row">
 					<div class="col-md-3 offset-md-1">
-						<div class="card mt-5 mb-5">
+						<div class="card mt-5 mb-5 shadow">
 							<h5 class="card-header bg-secondary text-white">${posting.name}</h5>
 							<div class="card-body">
 
@@ -63,7 +63,7 @@
 					</div>
 					<div class="col-md-7">
 
-						<div class="card mt-5 mb-5">
+						<div class="card mt-5 mb-5 shadow">
 							<div class="card-body">
 								<div class="row">
 									<div class="col-md-12">
@@ -148,7 +148,13 @@
 															<li class="list-group-item">${e.schoolName},
 																Napomena: ${e.note}</li>
 														</c:forEach>
+														<c:if
+															test="${application.candidate.education.size() == 0}">
+															<li class="list-group-item">Kandidat nije uneo ovaj
+																podatak.</li>
+														</c:if>
 													</ul>
+
 												</div>
 											</div>
 											<div class="form-group row">
@@ -156,9 +162,14 @@
 												<div class="col-8">
 													<ul class="list-group">
 														<c:forEach items="${languages}" var="l" varStatus="status">
-															<li class="list-group-item">${l.language}, Nivo:
+															<li class="list-group-item">${l.language},Nivo:
 																${l.level}</li>
 														</c:forEach>
+														<c:if
+															test="${languages.size() == 0}">
+															<li class="list-group-item">Kandidat nije uneo ovaj
+																podatak.</li>
+														</c:if>
 													</ul>
 												</div>
 											</div>
@@ -172,6 +183,11 @@
 															<li class="list-group-item">${c.certificate},
 																Napomena: ${c.note}</li>
 														</c:forEach>
+														<c:if
+															test="${application.certifications.size() == 0}">
+															<li class="list-group-item">Kandidat nije uneo ovaj
+																podatak.</li>
+														</c:if>
 													</ul>
 												</div>
 											</div>
@@ -180,6 +196,11 @@
 												<p class="col-4 col-form-label">Napomena</p>
 												<div class="col-8">
 													<p id="candidateNote">${application.note}</p>
+													<c:if
+															test="${!application.note}">
+															<li class="list-group-item">Kandidat nije uneo ovaj
+																podatak.</li>
+													</c:if>
 												</div>
 											</div>
 											<hr>
@@ -201,7 +222,8 @@
 													</a>
 												</div>
 												<div class="float-right">
-													<button type="button" class="btn btn-info mr-3" data-toggle="modal" data-target="#exampleModal">Kontaktiraj</button>
+													<button type="button" class="btn btn-info mr-3"
+														data-toggle="modal" data-target="#exampleModal">Kontaktiraj</button>
 													<a
 														href="${pageContext.request.contextPath}/admin/postings/${posting.id }/applications/${application.id}/delete"
 														onclick="if (!(confirm('Da li sigurno zelite da uklonite aplikaciju?'))) return false">
@@ -238,16 +260,19 @@
 						<div class="modal-body">
 							<form:form modelAttribute="email" method="post"
 								action="${pageContext.request.contextPath}/admin/postings/${posting.id }/applications/${application.id}/sendEmail">
-								<form:input path="to" cssClass="form-control mb-2" placeholder="Unesite adresu ..." autofocus="autofocus"
-									value="${emai.to}"/>
+								<form:input path="to" cssClass="form-control mb-2"
+									placeholder="Unesite adresu ..." autofocus="autofocus"
+									value="${emai.to}" />
 								<form:input path="subject" cssClass="form-control mb-2"
-									value="${email.subject}" placeholder="Unesite subject ..." required="required" />
-								<form:textarea path="text" rows="4" cssClass="w-100 rounded" placeholder=" Unesite poruku ..."
-									value="${email.text}" required="required"/>
+									value="${email.subject}" placeholder="Unesite subject ..."
+									required="required" />
+								<form:textarea path="text" rows="4" cssClass="w-100 rounded"
+									placeholder=" Unesite poruku ..." value="${email.text}"
+									required="required" />
 								<hr>
 								<button type="button" class="btn btn-secondary"
 									data-dismiss="modal">Odustani</button>
-								<input type="submit" class="btn btn-primary" value ="Posalji">
+								<input type="submit" class="btn btn-primary" value="Posalji">
 							</form:form>
 						</div>
 					</div>

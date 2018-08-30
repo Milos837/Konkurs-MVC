@@ -240,7 +240,7 @@
 					</div>
 
 					<div class="form-group">
-						<label for="file">Okacite CV (u PDF formatu):</label><br>
+						<label for="file">Okacite CV (u PDF formatu)*:</label><br>
 						<input
 							type=file name="file" accept="application/pdf"
 							required="required">
