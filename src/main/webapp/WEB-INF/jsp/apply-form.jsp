@@ -240,9 +240,22 @@
 					</div>
 
 					<div class="form-group">
-						<label for="file">Okacite CV (u PDF formatu):</label> <input
+						<label for="file">Okacite CV (u PDF formatu):</label><br>
+						<input
 							type=file name="file" accept="application/pdf"
 							required="required">
+					</div>
+					
+					<div class="form-group">
+						<label for="mLetter">Okacite motivaciono pismo (u PDF formatu):</label><br>
+						<input
+							type=file name="mLetter" accept="application/pdf">
+					</div>
+					
+					<div class="form-group">
+						<label for="cLetter">Okacite propratno pismo (u PDF formatu):</label><br>
+						<input
+							type=file name="cLetter" accept="application/pdf">
 					</div>
 
 					<div class="text-center">

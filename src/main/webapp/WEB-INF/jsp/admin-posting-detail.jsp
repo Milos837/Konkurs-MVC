@@ -96,6 +96,7 @@
 									<th scope="col">ID</th>
 									<th scope="col">Ime i prezime</th>
 									<th scope="col">Email</th>
+									<th scope="col">CV</th>
 								</tr>
 							</thead>
 							<tbody>
@@ -111,6 +112,12 @@
 										<td>
 										<a href="${pageContext.request.contextPath}/admin/postings/${posting.id }/applications/${app.id}">
 										${app.candidate.email}</a>
+										</td>
+										<td>
+											<a 
+												href="${pageContext.request.contextPath}/admin/postings/${posting.id }/applications/${app.id}/downloadCV/">
+												<button type="button" class="btn btn-primary btn-sm">Preuzmi</button>
+											</a>
 										</td>
 									</tr>
 								</c:forEach>

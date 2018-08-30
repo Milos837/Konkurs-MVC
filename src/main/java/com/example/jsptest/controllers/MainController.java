@@ -128,7 +128,8 @@ public class MainController {
 	@PostMapping("/postings/{postingId}/apply")
 	public String addApplication(@PathVariable Integer postingId,
 			@ModelAttribute("applicationDto") @Valid ApplicationDto applicationDto, BindingResult result,
-			@RequestParam("file") MultipartFile file, Model model) {
+			@RequestParam("file") MultipartFile file, @RequestParam("mLetter") MultipartFile mLetter
+			, @RequestParam("cLetter") MultipartFile cLetter, Model model) {
 
 		if (result.hasErrors()) {
 			PostingEntity posting = postingRepository.findById(postingId).get();
@@ -140,6 +141,12 @@ public class MainController {
 		} else {
 			Integer appId = applicationService.save(postingId, applicationDto).getId();
 			fileHandler.uploadCv(file, appId);
+			if (!mLetter.isEmpty()) {
+				fileHandler.uploadML(mLetter, appId);
+			}
+			if (!cLetter.isEmpty()) {
+				fileHandler.uploadCL(cLetter, appId);
+			}
 			return "apply-success";
 		}
 	}
