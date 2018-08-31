@@ -42,11 +42,17 @@ public class ApplicationEntity {
 	
 	@OneToOne(cascade = CascadeType.REFRESH, fetch = FetchType.LAZY)
 	@JsonIgnore
-	private AttachmentEntity cv;
+	private AttachmentEntity attachment;
 	
 	@ManyToOne(cascade = CascadeType.REFRESH, fetch = FetchType.LAZY)
 	@JoinColumn(name = "posting")
 	private PostingEntity posting;
+	
+	@Column
+	private Boolean hasMotivationalLetter;
+	
+	@Column
+	private Boolean hasCoverLetter;
 	
 	@Column
 	private Boolean deleted;
@@ -90,12 +96,12 @@ public class ApplicationEntity {
 		this.note = note;
 	}
 
-	public AttachmentEntity getCv() {
-		return cv;
+	public AttachmentEntity getAttachment() {
+		return attachment;
 	}
 
-	public void setCv(AttachmentEntity cv) {
-		this.cv = cv;
+	public void setAttachment(AttachmentEntity attachment) {
+		this.attachment = attachment;
 	}
 
 	public PostingEntity getPosting() {
@@ -104,6 +110,22 @@ public class ApplicationEntity {
 
 	public void setPosting(PostingEntity posting) {
 		this.posting = posting;
+	}
+
+	public Boolean getHasMotivationalLetter() {
+		return hasMotivationalLetter;
+	}
+
+	public void setHasMotivationalLetter(Boolean hasMotivationalLetter) {
+		this.hasMotivationalLetter = hasMotivationalLetter;
+	}
+
+	public Boolean getHasCoverLetter() {
+		return hasCoverLetter;
+	}
+
+	public void setHasCoverLetter(Boolean hasCoverLetter) {
+		this.hasCoverLetter = hasCoverLetter;
 	}
 
 	public Boolean getDeleted() {

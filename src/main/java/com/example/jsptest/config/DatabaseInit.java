@@ -6,6 +6,7 @@ import javax.annotation.PostConstruct;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.stereotype.Component;
 
 import com.example.jsptest.entities.AdminEntity;
 import com.example.jsptest.entities.CitizenshipEntity;
@@ -16,6 +17,7 @@ import com.example.jsptest.repositories.CitizenshipRepository;
 import com.example.jsptest.repositories.LanguageRepository;
 import com.example.jsptest.repositories.RoleRepository;
 
+@Component
 public class DatabaseInit {
 
 	@Autowired

@@ -79,6 +79,8 @@ public class ApplicationServiceImpl implements ApplicationService{
 		application.setCandidate(candidate);
 		application.setNote(newApplication.getApplicationNote());
 		application.setPosting(postingRepository.findById(postingId).get());
+		application.setHasMotivationalLetter(false);
+		application.setHasCoverLetter(false);
 		application = applicationRepository.save(application);
 		
 		if (newApplication.getCertifications() != null) {

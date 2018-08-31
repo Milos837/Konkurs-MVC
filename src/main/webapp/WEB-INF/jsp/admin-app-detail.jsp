@@ -165,8 +165,7 @@
 															<li class="list-group-item">${l.language},Nivo:
 																${l.level}</li>
 														</c:forEach>
-														<c:if
-															test="${languages.size() == 0}">
+														<c:if test="${languages.size() == 0}">
 															<li class="list-group-item">Kandidat nije uneo ovaj
 																podatak.</li>
 														</c:if>
@@ -183,8 +182,7 @@
 															<li class="list-group-item">${c.certificate},
 																Napomena: ${c.note}</li>
 														</c:forEach>
-														<c:if
-															test="${application.certifications.size() == 0}">
+														<c:if test="${application.certifications.size() == 0}">
 															<li class="list-group-item">Kandidat nije uneo ovaj
 																podatak.</li>
 														</c:if>
@@ -195,11 +193,10 @@
 											<div class="form-group row">
 												<p class="col-4 col-form-label">Napomena</p>
 												<div class="col-8">
-													<p id="candidateNote">${application.note}</p>
-													<c:if
-															test="${!application.note}">
-															<li class="list-group-item">Kandidat nije uneo ovaj
-																podatak.</li>
+													<p id="candidateNote">${application.candidate.note}</p>
+													<c:if test="${application.candidate.note == ''}">
+														<li class="list-group-item">Kandidat nije uneo ovaj
+															podatak.</li>
 													</c:if>
 												</div>
 											</div>
@@ -211,15 +208,22 @@
 														href="${pageContext.request.contextPath}/admin/postings/${posting.id }/applications/${application.id}/downloadCV/">
 														<button type="button" class="btn btn-success mr-3">Preuzmi
 															CV</button>
-													</a> <a
-														href="${pageContext.request.contextPath}/admin/postings/${posting.id }/applications/${application.id}/downloadML/">
-														<button type="button" class="btn btn-success mr-3">Preuzmi
-															ML</button>
-													</a> <a
-														href="${pageContext.request.contextPath}/admin/postings/${posting.id }/applications/${application.id}/downloadCL/">
-														<button type="button" class="btn btn-success mr-3">Preuzmi
-															CL</button>
 													</a>
+													<c:if test="${application.hasMotivationalLetter}">
+														<a
+															href="${pageContext.request.contextPath}/admin/postings/${posting.id }/applications/${application.id}/downloadML/">
+															<button type="button" class="btn btn-success mr-3">Preuzmi
+																ML</button>
+														</a>
+													</c:if>
+													<c:if test="${application.hasCoverLetter}">
+														<a
+															href="${pageContext.request.contextPath}/admin/postings/${posting.id }/applications/${application.id}/downloadCL/">
+															<button type="button" class="btn btn-success mr-3">Preuzmi
+																CL</button>
+														</a>
+													</c:if>
+
 												</div>
 												<div class="float-right">
 													<button type="button" class="btn btn-info mr-3"

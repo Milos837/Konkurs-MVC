@@ -55,6 +55,9 @@ public class FileHandlerImpl implements FileHandler {
 					AttachmentEntity attachment = attachmentRepository.findByApplication(app);
 					attachment.setMotivation(bytes);
 					attachmentRepository.save(attachment);
+					
+					app.setHasMotivationalLetter(true);
+					applicationRepository.save(app);
 
 					return attachment;
 				}
@@ -78,6 +81,9 @@ public class FileHandlerImpl implements FileHandler {
 					AttachmentEntity attachment = attachmentRepository.findByApplication(app);
 					attachment.setCoverLetter(bytes);
 					attachmentRepository.save(attachment);
+					
+					app.setHasCoverLetter(true);
+					applicationRepository.save(app);
 
 					return attachment;
 				}
@@ -88,13 +94,6 @@ public class FileHandlerImpl implements FileHandler {
 
 		}
 		return null;
-	}
-
-	public byte[] getCv(Integer appId) {
-
-		AttachmentEntity cv = attachmentRepository.findByApplication(applicationRepository.findById(appId).get());
-
-		return cv.getCv();
 	}
 
 }

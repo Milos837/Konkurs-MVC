@@ -23,7 +23,7 @@
 			
 			<form:form
 				action="${pageContext.request.contextPath}/authenticateLogin"
-				method="POST" cssClass="form form-signin" cssStyle="margin-top: 200px">
+				method="POST" cssClass="form form-signin" id="form-signin">
 				<h2 class="text-center">Prijavljivanje</h2>
 				<div class="form-group">
 					<label for="username">Korisnicko ime:</label> <input type="text"

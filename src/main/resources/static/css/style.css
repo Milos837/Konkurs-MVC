@@ -30,8 +30,10 @@ html, body {
 	height: 60px
 }
 
-.naslov-main {
-	padding-top: 150px;
+@media screen and (min-width: 600px) {
+    .naslov-main {
+      padding-top: 150px;
+    }
 }
 
 .form-signin {
@@ -40,4 +42,10 @@ html, body {
 	padding: 15px;
 	margin: auto;
 	width: 100%;
+}
+
+@media screen and (min-width: 600px) {
+    #form-signin {
+      margin-top: 200px;
+    }
 }

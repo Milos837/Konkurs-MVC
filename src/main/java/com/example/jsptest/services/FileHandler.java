@@ -7,8 +7,6 @@ import com.example.jsptest.entities.AttachmentEntity;
 public interface FileHandler {
 	
 	public AttachmentEntity uploadCv(MultipartFile file, Integer appId);
-	
-	public byte[] getCv(Integer appId);
 
 	public AttachmentEntity uploadML(MultipartFile file, Integer appId);
 	
