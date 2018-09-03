@@ -31,7 +31,7 @@
 						placeholder="Unesite korisnicko ime ..." required autofocus>
 				</div>
 				<div class="form-group">
-					<label for="password">Lozinka:</label> <input type="text"
+					<label for="password">Lozinka:</label> <input type="password"
 						class="form-control" name="password"
 						placeholder="Unesite lozinku ..." required>
 				</div>

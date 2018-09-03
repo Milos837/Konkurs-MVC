@@ -21,7 +21,7 @@
 		<div id="body">
 
 			<div class="container">
-				<div class="card mt-5 shadow">
+				<div class="card mt-5 mb-5 shadow">
 					<h5 class="card-header bg-secondary text-white">${posting.name}</h5>
 					<div class="card-body">
 

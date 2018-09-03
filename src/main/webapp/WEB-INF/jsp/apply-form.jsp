@@ -237,6 +237,7 @@
 						<label for="candidateNote">Napomena:</label>
 						<form:textarea path="candidateNote" rows="3" cssClass="w-100"
 							placeholder="Unesite napomenu ..." />
+						<form:errors path="candidateNote" cssClass="text-danger" />
 					</div>
 
 					<div class="form-group">

@@ -48,6 +48,7 @@ public class ApplicationDto {
 
 	private List<EducationEntity> education;
 
+	@Size(max = 250, message = "Note cannot have more than {max} characters.")
 	private String candidateNote;
 
 	private List<CertificateEntity> certifications;

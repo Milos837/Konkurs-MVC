@@ -134,9 +134,11 @@ public class MainController {
 		if (result.hasErrors()) {
 			PostingEntity posting = postingRepository.findById(postingId).get();
 			List<CitizenshipEntity> citizenships = (List<CitizenshipEntity>) citizenshipRepository.findAll();
+			List<LanguageEntity> languages = (List<LanguageEntity>) languageRepository.findAll();
 
 			model.addAttribute("posting", posting);
 			model.addAttribute("citizenships", citizenships);
+			model.addAttribute("languages", languages);
 			return "apply-form";
 		} else {
 			Integer appId = applicationService.save(postingId, applicationDto).getId();
